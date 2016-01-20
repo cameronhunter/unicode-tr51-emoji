@@ -1,7 +1,7 @@
 {
   "name": "unicode-tr51-emoji",
   "version": "0.0.1",
-  "description": "Emoji data extracted from Unicode Technical Report #51",
+  "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
   "main": "index.js",
   "scripts": {
     "compile": "rollup -c",
