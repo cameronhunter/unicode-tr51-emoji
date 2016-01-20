@@ -10,8 +10,8 @@
     const codepoints = args.map(c => parseInt(c, 16));
     const symbol = String.fromCodePoint(...codepoints);
     const unicode = args.map(c => `U+${c}`.toUpperCase());
-    const bytes = symbol.split("").map(c => escape(c))
-    return { symbol, unicode, codepoints, bytes };
+    const escaped = symbol.split("").map(c => escape(c))
+    return { symbol, unicode, codepoints, escaped };
   }
 }
 
