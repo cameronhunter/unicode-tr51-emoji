@@ -1,14 +1,16 @@
 {
   "name": "unicode-tr51-emoji",
-  "version": "0.0.3",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
   "main": "index.js",
   "scripts": {
     "compile": "rollup -c",
     "prebuild": "npm run compile",
-    "build:v1.0": "./bin/build -i ./data/v1.0/emoji-data.txt -o ./v1.0",
-    "build:v2.0": "./bin/build -i ./data/v2.0/emoji-data.txt -o ./v2.0",
-    "build:latest": "./bin/build -i ./data/v2.0/emoji-data.txt -o ./",
+    "build:v1.0": "bin/build -i data/v1.0/emoji-data.txt -o v1.0",
+    "build:v2.0": "bin/build -i ./data/v2.0/emoji-data.txt -o ./v2.0",
+    "build:latest": "bin/build -i data/v2.0/emoji-data.txt -o .",
     "build": "npm run build:v1.0 && npm run build:v2.0 && npm run build:latest",
     "pretest": "npm run build",
     "test": "ava --tap | tap-diff",
@@ -17,6 +19,15 @@
   "bin": {
     "unicode-tr51": "bin/build"
   },
+  "keywords": [
+    "unicode",
+    "unicode-data",
+    "code points",
+    "symbols",
+    "characters",
+    "emoji",
+    "data"
+  ],
   "files": [
     "bin",
     "data",
@@ -27,8 +38,6 @@
     "code-points.js",
     "symbols.js"
   ],
-  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
-  "license": "MIT",
   "dependencies": {
     "jsesc": "^0.5.0",
     "mkdirp": "^0.5.1",
