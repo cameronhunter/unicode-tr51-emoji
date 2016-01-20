@@ -23,10 +23,10 @@ By default it returns the latest version (v2.0), you can access particular versi
 
 ```js
 // v1.0 (http://www.unicode.org/Public/emoji/1.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/code-points');
-var symbols = require('unicode-tr51-emoji/symbols');
+var codepoints = require('unicode-tr51-emoji/v1.0/code-points');
+var symbols = require('unicode-tr51-emoji/v1.0/symbols');
 
 // v2.0 (http://www.unicode.org/Public/emoji/2.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/code-points');
-var symbols = require('unicode-tr51-emoji/symbols');
+var codepoints = require('unicode-tr51-emoji/v2.0/code-points');
+var symbols = require('unicode-tr51-emoji/v2.0/symbols');
 ```
