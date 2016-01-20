@@ -1,6 +1,6 @@
 {
   "name": "unicode-tr51-emoji",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
@@ -19,6 +19,11 @@
   "bin": {
     "unicode-tr51": "bin/build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cameronhunter/unicode-tr51-emoji.git"
+  },
+  "bugs": "https://github.com/cameronhunter/unicode-tr51-emoji/issues",
   "keywords": [
     "unicode",
     "unicode-data",
