@@ -13,14 +13,21 @@ var opts = require("nomnom")
     .option("outputDir", { required: true, full: "output-dir", abbr: "o", position: 1, metavar: "DIR", help: "Directory to output to" })
     .parse();
 
-mkdirp.sync(opts.outputDir);
+fs.access(opts.input, fs.F_OK, function(err) {
+  if (!err) {
+    mkdirp.sync(opts.outputDir);
 
-fs.readFile(opts.input, "utf8", function(error, data) {
-  console.info("Creating", opts.outputDir, "from", opts.input);
+    fs.readFile(opts.input, "utf8", function(error, data) {
+      console.info("Creating", opts.outputDir, "from", opts.input);
 
-  var parsed = parser.parse(data);
+      var parsed = parser.parse(data);
 
-  fs.writeFileSync(path.join(opts.outputDir, "index.js"), module(parsed));
-  fs.writeFileSync(path.join(opts.outputDir, "symbols.js"), module(parsed.map(c => c.symbol)));
-  fs.writeFileSync(path.join(opts.outputDir, "code-points.js"), module(parsed.map(c => c.codepoints).map(c => c.length == 1 ? c[0] : c)));
+      fs.writeFileSync(path.join(opts.outputDir, "index.js"), module(parsed));
+      fs.writeFileSync(path.join(opts.outputDir, "symbols.js"), module(parsed.map(c => c.symbol)));
+      fs.writeFileSync(path.join(opts.outputDir, "code-points.js"), module(parsed.map(c => c.codepoints).map(c => c.length == 1 ? c[0] : c)));
+    });
+  } else {
+    console.error("Couldn't access input file:", opts.input)
+    process.exit(1);
+  }
 });
