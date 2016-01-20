@@ -1,6 +1,6 @@
 # unicode-tr51-emoji
 
-[![NPM Version](https://img.shields.io/npm/v/unicode-tr51-emoji.svg)](https://npmjs.org/package/unicode-tr51-emoji) [![License](https://img.shields.io/npm/l/unicode-tr51-emoji.svg)](https://github.com/cameronhunter/unicode-tr51-emoji/blob/master/LICENSE.md)
+[![Build Status](https://travis-ci.org/cameronhunter/unicode-tr51-emoji.svg?branch=master)](https://travis-ci.org/cameronhunter/unicode-tr51-emoji) [![NPM Version](https://img.shields.io/npm/v/unicode-tr51-emoji.svg)](https://npmjs.org/package/unicode-tr51-emoji) [![License](https://img.shields.io/npm/l/unicode-tr51-emoji.svg)](https://github.com/cameronhunter/unicode-tr51-emoji/blob/master/LICENSE.md)
 
 This package enables an easy way of getting the list of all emoji symbols (in string or code point format) in your JavaScript build scripts. It is inspired by (and API compatible) with Mathias Bynens's [unicode-tr51](https://github.com/mathiasbynens/unicode-tr51).
 
