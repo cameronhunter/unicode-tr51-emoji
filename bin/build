@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var parser = require("../parser");
+var mkdirp = require("mkdirp");
+var fs = require("fs");
+var path = require("path");
+var opts = require("nomnom")
+    .option("input", { required: true, abbr: "i", position: 0, metavar: "PATH", help: "Path to read from" })
+    .option("output", { required: true, abbr: "o", position: 1, metavar: "PATH", help: "Path to output to" })
+    .parse();
+
+mkdirp.sync(path.dirname(opts.output));
+
+fs.readFile(opts.input, "utf8", function(error, data) {
+  console.info("Creating", opts.output, "from", opts.input);
+  fs.writeFileSync(opts.output, "module.exports = " + JSON.stringify(parser.parse(data), null, 2) + ";\n");
+});

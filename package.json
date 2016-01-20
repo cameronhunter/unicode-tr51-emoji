@@ -1,0 +1,34 @@
+{
+  "name": "unicode-tr51-parser",
+  "version": "0.0.1",
+  "description": "Emoji data extracted from Unicode Technical Report #51",
+  "main": "latest",
+  "scripts": {
+    "compile": "rollup -c",
+    "prebuild": "npm run compile",
+    "build:1.0": "bin/build data/1.0/emoji-data.txt 1.0/index.js",
+    "build:2.0": "bin/build data/2.0/emoji-data.txt 2.0/index.js",
+    "build:latest": "bin/build data/2.0/emoji-data.txt latest/index.js",
+    "build": "npm run build:1.0 && npm run build:2.0 && npm run build:latest",
+    "test": "ava"
+  },
+  "files": [
+    "1.0",
+    "2.0",
+    "latest",
+    "parser"
+  ],
+  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.10.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "node-mkdirp": "0.0.1",
+    "nomnom": "^1.8.1",
+    "rollup": "^0.25.0",
+    "rollup-plugin-babel": "^2.3.9",
+    "rollup-plugin-pegjs": "^2.0.0",
+    "rollup-plugin-uglify": "^0.1.0",
+    "tap-diff": "^0.1.1"
+  }
+}
