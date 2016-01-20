@@ -1,6 +1,6 @@
 {
   "name": "unicode-tr51-emoji",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
   "main": "index.js",
   "scripts": {
@@ -11,16 +11,19 @@
     "build:latest": "./bin/build -i ./data/v2.0/emoji-data.txt -o .",
     "build": "npm run build:v1.0 && npm run build:v2.0 && npm run build:latest",
     "pretest": "npm run build",
-    "test": "ava --tap | tap-diff"
+    "test": "ava --tap | tap-diff",
+    "prepublish": "npm test"
   },
   "bin": {
     "unicode-tr51": "bin/build"
   },
   "files": [
     "bin",
+    "data",
+    "latest",
+    "parser",
     "v1.0",
-    "v2.0",
-    "latest"
+    "v2.0"
   ],
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
