@@ -1,6 +1,8 @@
-latest/
 node_modules/
 npm-debug.log
 parser/
 v1.0/
 v2.0/
+index.js
+code-points.js
+symbols.js
