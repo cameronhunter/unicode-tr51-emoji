@@ -6,25 +6,32 @@
   "scripts": {
     "compile": "rollup -c",
     "prebuild": "npm run compile",
-    "build:1.0": "bin/build data/1.0/emoji-data.txt 1.0/index.js",
-    "build:2.0": "bin/build data/2.0/emoji-data.txt 2.0/index.js",
-    "build:latest": "bin/build data/2.0/emoji-data.txt latest/index.js",
-    "build": "npm run build:1.0 && npm run build:2.0 && npm run build:latest",
-    "test": "ava"
+    "build:v1.0": "bin/build -i data/v1.0/emoji-data.txt -o v1.0",
+    "build:v2.0": "bin/build -i data/v2.0/emoji-data.txt -o v2.0",
+    "build:latest": "bin/build -i data/v2.0/emoji-data.txt -o latest",
+    "build": "npm run build:v1.0 && npm run build:v2.0 && npm run build:latest",
+    "test": "ava --tap | tap-diff"
+  },
+  "bin": {
+    "unicode-tr51": "bin/build"
   },
   "files": [
-    "1.0",
-    "2.0",
-    "latest",
-    "parser"
+    "bin",
+    "v1.0",
+    "v2.0",
+    "latest"
   ],
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
+  "dependencies": {
+    "node-mkdirp": "0.0.1",
+    "nomnom": "^1.8.1"
+  },
   "devDependencies": {
     "ava": "^0.10.0",
     "babel-preset-es2015-rollup": "^1.1.1",
-    "node-mkdirp": "0.0.1",
-    "nomnom": "^1.8.1",
+    "babel-preset-stage-1": "^6.3.13",
+    "jsesc": "^0.5.0",
     "rollup": "^0.25.0",
     "rollup-plugin-babel": "^2.3.9",
     "rollup-plugin-pegjs": "^2.0.0",

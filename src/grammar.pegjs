@@ -1,14 +1,22 @@
 {
-  const codepoints = (codepoint) => {
-    const symbol = String.fromCodePoint(parseInt(codepoint, 16));
-    const bytes = symbol.split("").map(c => `\\u${c.charCodeAt(0).toString(16)}`).join("");
-    return { symbol, codepoints: bytes };
+  const escape = require("jsesc");
+
+  const range = (...args) => {
+    const [start, end] = args.map(c => parseInt(c, 16));
+    return [...Array((end + 1) - start)].map((_, i) => start + i).map(d => d.toString(16));
+  }
+
+  const details = (...args) => {
+    const codepoints = args.map(c => parseInt(c, 16));
+    const symbol = String.fromCodePoint(...codepoints);
+    const bytes = symbol.split("").map(c => escape(c))
+    return { symbol, codepoints, bytes };
   }
 }
 
 File
  = lines:Line*
-   { return lines.filter(line => !!line) }
+   { return lines.filter(line => !!line).reduce((result, c) => [...result, ...c]) }
 
 Line
   = (DefinitionV1 / DefinitionV2)
@@ -23,7 +31,7 @@ Line
 
 DefinitionV2
   = codepoints:Codepoints _ ";" _ property:Text _ comment:Comment _ "\n"?
-    { return { codepoints } }
+    { return codepoints }
 
 /***************************************************************************************************
  * Version 1.0
@@ -34,7 +42,7 @@ DefinitionV2
 
 DefinitionV1
   = codepoints:Codepoints _ ";" _ style:Text _ ";" _ level:Text _ ";" _ modifier:Text _ ";" _ sources:Sources _ comment:Comment _ "\n"?
-    { return { codepoints } }
+    { return codepoints }
 
 Source
   = $([ajwxz])
@@ -49,13 +57,14 @@ Sources
 
 Codepoint
   = text:$([0-9A-F]+)
-    { return codepoints(text) }
 
 Codepoints
-  = start:Codepoint (".." / _) end:Codepoint
-    { return [start, end] }
+  = start:Codepoint ".." end:Codepoint
+    { return range(start, end).map(c => details(c)) }
+  / first:Codepoint _ second:Codepoint
+    { return [details(first, second)] }
   / codepoint:Codepoint
-    { return [codepoint] }
+    { return [details(codepoint)] }
 
 Comment
   = "#" comment:$([^\n]*) _ "\n"?
