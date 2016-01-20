@@ -1,6 +1,6 @@
 {
   "name": "unicode-tr51-emoji",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
   "dependencies": {
+    "jsesc": "^0.5.0",
     "mkdirp": "^0.5.1",
     "nomnom": "^1.8.1"
   },
