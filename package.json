@@ -46,7 +46,7 @@
     "symbols.js"
   ],
   "dependencies": {
-    "jsesc": "^1.0.0",
+    "jsesc": "^2.2.0",
     "mkdirp": "^0.5.1",
     "nomnom": "^1.8.1"
   },
