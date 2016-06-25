@@ -20,8 +20,19 @@ File
    { return lines.filter(line => !!line).reduce((result, c) => [...result, ...c]) }
 
 Line
-  = (DefinitionV1 / DefinitionV2)
+  = (DefinitionV1 / DefinitionV2 / DefinitionV3)
   / (Comment / BlankLine) { return null }
+
+/***************************************************************************************************
+ * Version 3.0
+ *
+ * Format:
+ * codepoint(s) ; property(=Yes) # version [count] name(s)
+ **************************************************************************************************/
+
+DefinitionV3
+  = codepoints:Codepoints _ ";" _ property:Text _ "#" _ version:Text _ comment:Comment _ "\n"?
+    { return codepoints }
 
 /***************************************************************************************************
  * Version 2.0
@@ -72,7 +83,7 @@ Comment
     { return comment.trim() }
 
 Text
-  = $([a-z_0-9]i+)
+  = $([a-z_0-9.]i+)
 
 BlankLine
   = _ "\n"
