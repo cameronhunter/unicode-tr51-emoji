@@ -1,10 +1,12 @@
 {
+  const escape = require("jsesc");
+
   const details = (...args) => {
     const codepoints = args.map(c => parseInt(c, 16));
-    return {
-        symbol: String.fromCodePoint(...codepoints),
-        codepoints: args.map(c => `U+${c}`.toUpperCase())
-    };
+    const symbol = String.fromCodePoint(...codepoints);
+    const unicode = args.map(c => `U+${c}`.toUpperCase());
+    const escaped = symbol.split("").map(c => escape(c))
+    return { symbol, unicode, codepoints, escaped };
   }
 }
 
@@ -18,7 +20,7 @@ Line
 
 DefinitionV4
   = codepoints:Codepoints _ ";" _ type:Text _ ";" _ description:Description _ "#" _ version:Word _ (!"\n" .)* "\n"?
-    { return Object.assign({ type, description, version }, codepoints) }
+    { return Object.assign({ description, type, version }, codepoints) }
 
 // TODO: Include description
 DefinitionV3
