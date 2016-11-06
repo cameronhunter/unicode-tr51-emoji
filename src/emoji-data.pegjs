@@ -17,7 +17,7 @@
 
 File
  = lines:Line*
-   { return lines.filter(Boolean).reduce((result, c) => [...result, ...c]) }
+   { return lines.filter(Boolean).reduce((result, c) => [...result, ...c], []) }
 
 Line
   = (DefinitionV1 / DefinitionV2 / DefinitionV3to4)

@@ -10,7 +10,7 @@
 # For documentation and usage, see http://www.unicode.org/reports/tr51
 #
 # Format:
-#   code_point(s) ; type_field ; description # comments 
+#   code_point(s) ; type_field ; description # comments
 # Fields:
 #   code_point(s): one or more code points in hex format, separated by spaces
 #   type_field: any of {Emoji_Combining_Sequence, Emoji_Flag_Sequence, Emoji_Modifier_Sequences}

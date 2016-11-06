@@ -1,9 +1,10 @@
 {
   const details = (...args) => {
     const codepoints = args.map(c => parseInt(c, 16));
-    const symbol = String.fromCodePoint(...codepoints);
-    const unicode = args.map(c => `U+${c}`.toUpperCase());
-    return { symbol, unicode, codepoints };
+    return {
+        symbol: String.fromCodePoint(...codepoints),
+        codepoints: args.map(c => `U+${c}`.toUpperCase())
+    };
   }
 }
 
@@ -16,25 +17,25 @@ Line
   / (Comment / BlankLine) { return null }
 
 DefinitionV4
-  = sequence:Codepoints _ ";" _ type:Text _ ";" _ description:Description _ "#" _ version:Word _ (!"\n" .)* "\n"?
-    { return { ...sequence, type, description, version } }
+  = codepoints:Codepoints _ ";" _ type:Text _ ";" _ description:Description _ "#" _ version:Word _ (!"\n" .)* "\n"?
+    { return Object.assign({ type, description, version }, codepoints) }
 
 // TODO: Include description
 DefinitionV3
-  = sequence:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ Word _ Word _ (!"\n" .)* "\n"?
-    { return { ...sequence, type, version } }
+  = codepoints:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ Word _ Word _ (!"\n" .)* "\n"?
+    { return Object.assign({ type, version }, codepoints) }
 
 // TODO: Include description
 DefinitionV2
-  = sequence:Codepoints _ "#" _ (!"\n" .)* "\n"?
-    { return sequence }
+  = codepoints:Codepoints _ "#" _ (!"\n" .)* "\n"?
+    { return codepoints }
 
 Codepoints
-  = head:Codepoint tail:(_ codepoint:Codepoint { return codepoint })*
+  = head:Codepoint tail:(" " codepoint:Codepoint { return codepoint })*
     { return details(head, ...tail) }
 
 Codepoint
-  = text:$([0-9A-F]+)
+  = $([0-9A-F]i+)
 
 Description
   = head:Word tail:(" " second:Word { return " " + second })*

@@ -1,10 +1,13 @@
+code-points.js
+emoji-data.js
+emoji-sequences.js
+emoji-zwj-sequences.js
+index.js
 node_modules/
 npm-debug.log
 parser/
+symbols.js
 v1.0/
 v2.0/
 v3.0/
 v4.0/
-index.js
-code-points.js
-symbols.js
