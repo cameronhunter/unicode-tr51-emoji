@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "license": "MIT",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
-  "description": "Emoji data extracted from Unicode Technical Report #51 v1.0, v2.0, v3.0, and v4.0",
+  "description": "Emoji data parsed from Unicode Technical Report #51 v1.0, v2.0, v3.0, and v4.0",
   "main": "index.js",
   "scripts": {
     "rollup:help": "rollup --help",

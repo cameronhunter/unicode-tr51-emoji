@@ -15,26 +15,25 @@ npm install unicode-tr51-emoji
 In [Node.js](https://nodejs.org/):
 
 ```js
-var codepoints = require('unicode-tr51-emoji/code-points');
-var symbols = require('unicode-tr51-emoji/symbols');
+const codepoints = require('unicode-tr51-emoji/code-points');
+const symbols = require('unicode-tr51-emoji/symbols');
+
+const emojiData = require('unicode-tr51-emoji/emoji-data');
+const emojiSequences = require('unicode-tr51-emoji/emoji-sequences');
+const emojiZWJSequences = require('unicode-tr51-emoji/emoji-zwj-sequences');
 ```
 
 By default it returns the latest version (v4.0), you can access particular versions directly using:
 
 ```js
-// v1.0 (http://www.unicode.org/Public/emoji/1.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/v1.0/code-points');
-var symbols = require('unicode-tr51-emoji/v1.0/symbols');
-
-// v2.0 (http://www.unicode.org/Public/emoji/2.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/v2.0/code-points');
-var symbols = require('unicode-tr51-emoji/v2.0/symbols');
-
 // v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/v3.0/code-points');
-var symbols = require('unicode-tr51-emoji/v3.0/symbols');
+const emojiData = require('unicode-tr51-emoji/v3.0/emoji-data');
+const codepoints = require('unicode-tr51-emoji/v3.0/code-points');
+const symbols = require('unicode-tr51-emoji/v3.0/symbols');
 
-// v4.0 (http://www.unicode.org/Public/emoji/4.0/emoji-data.txt)
-var codepoints = require('unicode-tr51-emoji/v4.0/code-points');
-var symbols = require('unicode-tr51-emoji/v4.0/symbols');
+// v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-sequences.txt)
+const emojiSequences = require('unicode-tr51-emoji/v3.0/emoji-sequences');
+
+// v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-zwj-sequences.txt)
+const emojiZWJSequences = require('unicode-tr51-emoji/v3.0/emoji-zwj-sequences');
 ```
