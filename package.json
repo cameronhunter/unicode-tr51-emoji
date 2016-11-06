@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "license": "MIT",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
-  "description": "Emoji data parsed from Unicode Technical Report #51 v1.0, v2.0, v3.0, and v4.0",
+  "description": "Emoji data parsed from Unicode Technical Report #51 v1.0 – v4.0",
   "main": "index.js",
   "scripts": {
     "rollup:help": "rollup --help",
@@ -21,9 +21,6 @@
     "test": "ava --tap | tap-diff",
     "prepublish": "npm test"
   },
-  "bin": {
-    "unicode-tr51": "bin/build"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cameronhunter/unicode-tr51-emoji.git"
@@ -39,9 +36,6 @@
     "data"
   ],
   "files": [
-    "bin",
-    "data",
-    "parser",
     "v1.0",
     "v2.0",
     "v3.0",
@@ -53,18 +47,16 @@
     "code-points.js",
     "symbols.js"
   ],
-  "dependencies": {
-    "jsesc": "^2.2.0",
-    "mkdirp": "^0.5.1",
-    "nomnom": "^1.8.1"
-  },
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-preset-stage-1": "^6.16.0",
-    "rollup": "^0.36.3",
+    "jsesc": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "nomnom": "^1.8.1",
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-pegjs": "^2.1.1",
+    "rollup": "^0.36.3",
     "tap-diff": "^0.1.1"
   }
 }
