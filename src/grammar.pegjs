@@ -17,30 +17,20 @@
 
 File
  = lines:Line*
-   { return lines.filter(line => !!line).reduce((result, c) => [...result, ...c]) }
+   { return lines.filter(Boolean).reduce((result, c) => [...result, ...c]) }
 
 Line
-  = (DefinitionV1 / DefinitionV2 / DefinitionV3)
+  = (DefinitionV1 / DefinitionV2 / DefinitionV3to4)
   / (Comment / BlankLine) { return null }
 
 /***************************************************************************************************
- * Version 4.0
+ * Version 3.0 – 4.0
  *
  * Format:
  * codepoint(s) ; property(=Yes) # version [count] name(s)
  **************************************************************************************************/
 
-DefinitionV4
-  = DefinitionV3
-
-/***************************************************************************************************
- * Version 3.0
- *
- * Format:
- * codepoint(s) ; property(=Yes) # version [count] name(s)
- **************************************************************************************************/
-
-DefinitionV3
+DefinitionV3to4
   = codepoints:Codepoints _ ";" _ property:Text _ "#" _ version:Text _ comment:Comment _ "\n"?
     { return codepoints }
 
