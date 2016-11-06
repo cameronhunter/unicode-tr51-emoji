@@ -2,8 +2,8 @@ import babel from "rollup-plugin-babel";
 import pegjs from "rollup-plugin-pegjs";
 
 export default {
-  entry: "src/grammar.pegjs",
-  dest: "parser/index.js",
+  entry: "src/emoji-data.pegjs",
+  dest: "parser/emoji-data.js",
   format: "cjs",
   plugins: [
     pegjs(),
