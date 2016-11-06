@@ -19,7 +19,7 @@ var codepoints = require('unicode-tr51-emoji/code-points');
 var symbols = require('unicode-tr51-emoji/symbols');
 ```
 
-By default it returns the latest version (v3.0), you can access particular versions directly using:
+By default it returns the latest version (v4.0), you can access particular versions directly using:
 
 ```js
 // v1.0 (http://www.unicode.org/Public/emoji/1.0/emoji-data.txt)
@@ -33,4 +33,8 @@ var symbols = require('unicode-tr51-emoji/v2.0/symbols');
 // v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-data.txt)
 var codepoints = require('unicode-tr51-emoji/v3.0/code-points');
 var symbols = require('unicode-tr51-emoji/v3.0/symbols');
+
+// v4.0 (http://www.unicode.org/Public/emoji/4.0/emoji-data.txt)
+var codepoints = require('unicode-tr51-emoji/v4.0/code-points');
+var symbols = require('unicode-tr51-emoji/v4.0/symbols');
 ```

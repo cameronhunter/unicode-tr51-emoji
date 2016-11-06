@@ -3,16 +3,17 @@
   "version": "1.1.2",
   "license": "MIT",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
-  "description": "Emoji data extracted from Unicode Technical Report #51 v1.0 and v2.0",
+  "description": "Emoji data extracted from Unicode Technical Report #51 v1.0, v2.0, v3.0, and v4.0",
   "main": "index.js",
   "scripts": {
     "compile": "rollup -c",
     "prebuild": "npm run compile",
-    "build:v1.0": "bin/build -i ./data/v1.0/emoji-data.txt -o v1.0",
+    "build:v1.0": "bin/build -i ./data/v1.0/emoji-data.txt -o ./v1.0",
     "build:v2.0": "bin/build -i ./data/v2.0/emoji-data.txt -o ./v2.0",
     "build:v3.0": "bin/build -i ./data/v3.0/emoji-data.txt -o ./v3.0",
-    "build:latest": "bin/build -i ./data/v3.0/emoji-data.txt -o .",
-    "build": "npm run build:v1.0 && npm run build:v2.0 && npm run build:v3.0 && npm run build:latest",
+    "build:v4.0": "bin/build -i ./data/v4.0/emoji-data.txt -o ./v4.0",
+    "build:latest": "bin/build -i ./data/v4.0/emoji-data.txt -o .",
+    "build": "npm run build:v1.0 && npm run build:v2.0 && npm run build:v3.0 && npm run build:v4.0 && npm run build:latest",
     "pretest": "npm run build",
     "test": "ava --tap | tap-diff",
     "prepublish": "npm test"
@@ -41,6 +42,7 @@
     "v1.0",
     "v2.0",
     "v3.0",
+    "v4.0",
     "index.js",
     "code-points.js",
     "symbols.js"
@@ -54,9 +56,9 @@
     "ava": "^0.16.0",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-preset-stage-1": "^6.16.0",
-    "rollup": "^0.36.1",
+    "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.4.0",
-    "rollup-plugin-pegjs": "^2.0.0",
+    "rollup-plugin-pegjs": "^2.1.1",
     "tap-diff": "^0.1.1"
   }
 }
