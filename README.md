@@ -26,10 +26,11 @@ const emojiZWJSequences = require('unicode-tr51-emoji/emoji-zwj-sequences');
 By default it returns the latest version (v4.0), you can access particular versions directly using:
 
 ```js
-// v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-data.txt)
-const emojiData = require('unicode-tr51-emoji/v3.0/emoji-data');
 const codepoints = require('unicode-tr51-emoji/v3.0/code-points');
 const symbols = require('unicode-tr51-emoji/v3.0/symbols');
+
+// v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-data.txt)
+const emojiData = require('unicode-tr51-emoji/v3.0/emoji-data');
 
 // v3.0 (http://www.unicode.org/Public/emoji/3.0/emoji-sequences.txt)
 const emojiSequences = require('unicode-tr51-emoji/v3.0/emoji-sequences');
