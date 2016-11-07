@@ -13,28 +13,42 @@ const output = (filename) => path.join(opts.outputDir, filename);
 const input = (filename) => path.join(__dirname, filename);
 
 // Create output from emoji-data.txt files
-parse(input("../parser/emoji-data"), path.join(opts.input, "emoji-data.txt")).then((parsed) => {
+const emojiData = parse(input("../parser/emoji-data"), path.join(opts.input, "emoji-data.txt")).then((parsed) => {
   mkdirp.sync(opts.outputDir);
   console.info("Creating", opts.outputDir, "from", opts.input);
 
   return Promise.all([
     write(output("index.js"), parsed),
-    write(output("emoji-data.js"), parsed),
-    write(output("symbols.js"), parsed.map(_ => _.symbol)),
-    write(output("code-points.js"), parsed.map(_ => _.codepoints).map(c => c.length === 1 ? c[0] : c))
-  ]);
+    write(output("emoji-data.js"), parsed)
+  ]).then(() => {
+    return parsed;
+  });
 }).catch((error) => {
   console.error(error);
   process.exit(1);
 });
 
 // Create output from emoji(-zwj)?-sequences.txt files
-["emoji-sequences", "emoji-zwj-sequences"].forEach((file) => {
-  parse(input("../parser/emoji-sequences"), path.join(opts.input, `${file}.txt`)).then((parsed) => {
-    return write(output(`${file}.js`), parsed);
+const emojiSequences = ["emoji-sequences", "emoji-zwj-sequences"].map((file) => {
+  return parse(input("../parser/emoji-sequences"), path.join(opts.input, `${file}.txt`)).then((parsed) => {
+    return write(output(`${file}.js`), parsed).then(() => parsed);
   }).catch((error) => {
     console.error(error);
+    return [];
   });
+});
+
+// Create symbols and codepoints output
+Promise.all([emojiData, ...emojiSequences]).then(([data, sequences, zwjSequences]) => {
+  const symbols = (array) => array.map(_ => _.symbol);
+  const codepoints = (array) => array.map(_ => _.codepoints).map(c => c.length === 1 ? c[0] : c);
+  return Promise.all([
+    write(output("symbols.js"), [...symbols(data), ...symbols(sequences), ...symbols(zwjSequences)]),
+    write(output("code-points.js"), [...codepoints(data), ...codepoints(sequences), ...codepoints(zwjSequences)])
+  ]);
+}).catch((error) => {
+  console.error(error);
+  process.exit(1);
 });
 
 function parse(grammarPath, inputPath) {
