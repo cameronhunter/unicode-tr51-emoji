@@ -17,7 +17,7 @@
 
 File
  = lines:Line*
-   { return lines.filter(Boolean).reduce((result, c) => [...result, ...c], []) }
+   { return lines.filter(Boolean).reduce((result, c) => Array.isArray(c) ? [...result, ...c] : [...result, c], []) }
 
 Line
   = (DefinitionV1 / DefinitionV2 / DefinitionV3to4)
@@ -31,8 +31,8 @@ Line
  **************************************************************************************************/
 
 DefinitionV3to4
-  = codepoints:Codepoints _ ";" _ property:Text _ "#" _ version:Text _ comment:Comment _ "\n"?
-    { return codepoints }
+  = codepoints:Codepoints _ ";" _ type:Word _ "#" _ version:Version _ count:Count _ symbol:Word _ description:(!"\n" char:. { return char })* "\n"?
+    { return Array.isArray(codepoints) ? codepoints.map(c => Object.assign({ type, version }, c)) : Object.assign({ description: description.join(''), type, version }, codepoints) }
 
 /***************************************************************************************************
  * Version 2.0
@@ -42,8 +42,8 @@ DefinitionV3to4
  **************************************************************************************************/
 
 DefinitionV2
-  = codepoints:Codepoints _ ";" _ property:Text _ comment:Comment _ "\n"?
-    { return codepoints }
+  = codepoints:Codepoints _ ";" _ type:Word _ "#" _ count:Count _ symbols:Word _ description:(!"\n" char:. { return char })* "\n"?
+    { return Array.isArray(codepoints) ? codepoints.map(c => Object.assign({ type }, c)) : Object.assign({ description: description.join(''), type }, codepoints) }
 
 /***************************************************************************************************
  * Version 1.0
@@ -53,8 +53,8 @@ DefinitionV2
  **************************************************************************************************/
 
 DefinitionV1
-  = codepoints:Codepoints _ ";" _ style:Text _ ";" _ level:Text _ ";" _ modifier:Text _ ";" _ sources:Sources _ comment:Comment _ "\n"?
-    { return codepoints }
+  = codepoints:Codepoints _ ";" _ style:Word _ ";" _ level:Word _ ";" _ modifier:Word _ ";" _ sources:Sources _ "#" _ version:Version _ symbol:Word _ description:(!"\n" char:. { return char })* "\n"?
+    { return Object.assign({ description: description.join(''), version }, codepoints) }
 
 Source
   = $([ajwxz])
@@ -73,14 +73,23 @@ Codepoint
 Codepoints
   = start:Codepoint ".." end:Codepoint
     { return range(start, end).map(c => details(c)) }
-  / first:Codepoint _ second:Codepoint
-    { return [details(first, second)] }
-  / codepoint:Codepoint
-    { return [details(codepoint)] }
+  / head:Codepoint tail:(_ codepoint:Codepoint { return codepoint })*
+    { return details(head, ...tail) }
+
+Word
+  = $([^ ]+)
 
 Comment
   = "#" comment:$([^\n]*) _ "\n"?
     { return comment.trim() }
+
+Count
+  = "[" head:[0-9] tail:$([0-9])* "]"
+    { return parseInt([head, ...tail].join(''), 10) }
+
+Version
+  = "V"? version:$([0-9] "." [0-9])
+    { return version }
 
 Text
   = $([a-z_0-9.]i+)
