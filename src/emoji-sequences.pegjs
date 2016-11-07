@@ -36,10 +36,9 @@ DefinitionV4
  * code_point(s) ; type_field # version [count] name(s)
  **************************************************************************************************/
 
-// TODO: Include description
 DefinitionV3
-  = codepoints:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ Word _ Word _ (!"\n" .)* "\n"?
-    { return Object.assign({ type, version }, codepoints) }
+  = codepoints:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ count:Word _ symbol:Word _ description:(!"\n" char:. { return char })* "\n"?
+    { return Object.assign({ description: description.join(''), type, version }, codepoints) }
 
 /***************************************************************************************************
  * Version 2.0
@@ -48,10 +47,9 @@ DefinitionV3
  * codepoints ; # (sequence) description
  **************************************************************************************************/
 
-// TODO: Include description
 DefinitionV2
-  = codepoints:Codepoints _ "#" _ (!"\n" .)* "\n"?
-    { return codepoints }
+  = codepoints:Codepoints _ "#" _ symbol:Word _ description:(!"\n" char:. { return char })* "\n"?
+    { return Object.assign({ description: description.join('') }, codepoints) }
 
 /***************************************************************************************************
  * Common
