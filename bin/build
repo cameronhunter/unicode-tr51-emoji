@@ -12,17 +12,12 @@ const opts = require("nomnom")
 const output = (filename) => path.join(opts.outputDir, filename);
 const input = (filename) => path.join(__dirname, filename);
 
+mkdirp.sync(opts.outputDir);
+console.info("Creating", opts.outputDir, "from", opts.input);
+
 // Create output from emoji-data.txt files
 const emojiData = parse(input("../parser/emoji-data"), path.join(opts.input, "emoji-data.txt")).then((parsed) => {
-  mkdirp.sync(opts.outputDir);
-  console.info("Creating", opts.outputDir, "from", opts.input);
-
-  return Promise.all([
-    write(output("index.js"), parsed),
-    write(output("emoji-data.js"), parsed)
-  ]).then(() => {
-    return parsed;
-  });
+  return write(output("emoji-data.js"), parsed).then(() => parsed);
 }).catch((error) => {
   console.error(error);
   process.exit(1);
@@ -38,11 +33,12 @@ const emojiSequences = ["emoji-sequences", "emoji-zwj-sequences"].map((file) => 
   });
 });
 
-// Create symbols and codepoints output
+// Create index, symbols and codepoints output
 Promise.all([emojiData, ...emojiSequences]).then(([data, sequences, zwjSequences]) => {
   const symbols = (array) => array.map(_ => _.symbol);
   const codepoints = (array) => array.map(_ => _.codepoints).map(c => c.length === 1 ? c[0] : c);
   return Promise.all([
+    write(output("index.js"), [...data, ...sequences, ...zwjSequences]),
     write(output("symbols.js"), [...symbols(data), ...symbols(sequences), ...symbols(zwjSequences)]),
     write(output("code-points.js"), [...codepoints(data), ...codepoints(sequences), ...codepoints(zwjSequences)])
   ]);
