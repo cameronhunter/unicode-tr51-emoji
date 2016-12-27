@@ -51,7 +51,7 @@
     "ava": "^0.16.0",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-preset-stage-1": "^6.16.0",
-    "jsesc": "^2.2.0",
+    "jsesc": "^2.4.0",
     "mkdirp": "^0.5.1",
     "nomnom": "^1.8.1",
     "rollup-plugin-babel": "^2.4.0",
