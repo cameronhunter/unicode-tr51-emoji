@@ -6,6 +6,8 @@
   "description": "Emoji data parsed from Unicode Technical Report #51 v1.0 – v4.0",
   "main": "index.js",
   "scripts": {
+    "prefetchdata": "rm -rf data",
+    "fetchdata": "wget --show-progress --recursive --no-host-directories --cut-dirs=2 --directory-prefix=data ftp://ftp.unicode.org/Public/emoji/",
     "rollup:help": "rollup --help",
     "compile:emoji-data": "rollup -c --input ./src/emoji-data.pegjs --output ./parser/emoji-data.js",
     "compile:emoji-sequences": "rollup -c --input ./src/emoji-sequences.pegjs --output ./parser/emoji-sequences.js",
