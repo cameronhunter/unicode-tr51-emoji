@@ -10,12 +10,12 @@
 # For documentation and usage, see http://www.unicode.org/reports/tr51
 #
 # Warning: the format has changed from Version 1.0
-# Format:
-# codepoint(s) ; property(=Yes) # version [count] name(s)
+# Format: 
+# codepoint(s) ; property(=Yes) # version [count] name(s) 
 
 # ================================================
 
-# All omitted code points have Emoji=No
+# All omitted code points have Emoji=No 
 # @missing: 0000..10FFFF  ; Emoji ; No
 
 0023          ; Emoji                # 1.1  [1] (#)       NUMBER SIGN
@@ -232,7 +232,7 @@
 
 # ================================================
 
-# All omitted code points have Emoji_Presentation=No
+# All omitted code points have Emoji_Presentation=No 
 # @missing: 0000..10FFFF  ; Emoji_Presentation ; No
 
 231A..231B    ; Emoji_Presentation   # 1.1  [2] (⌚..⌛)    WATCH..HOURGLASS
@@ -353,7 +353,7 @@
 
 # ================================================
 
-# All omitted code points have Emoji_Modifier=No
+# All omitted code points have Emoji_Modifier=No 
 # @missing: 0000..10FFFF  ; Emoji_Modifier ; No
 
 1F3FB..1F3FF  ; Emoji_Modifier       # 8.0  [5] (🏻..🏿)    EMOJI MODIFIER FITZPATRICK TYPE-1-2..EMOJI MODIFIER FITZPATRICK TYPE-6
@@ -362,7 +362,7 @@
 
 # ================================================
 
-# All omitted code points have Emoji_Modifier_Base=No
+# All omitted code points have Emoji_Modifier_Base=No 
 # @missing: 0000..10FFFF  ; Emoji_Modifier_Base ; No
 
 261D          ; Emoji_Modifier_Base  # 1.1  [1] (☝)       WHITE UP POINTING INDEX
