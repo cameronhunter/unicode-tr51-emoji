@@ -23,7 +23,7 @@ const emojiSequences = require('unicode-tr51-emoji/emoji-sequences');
 const emojiZWJSequences = require('unicode-tr51-emoji/emoji-zwj-sequences');
 ```
 
-By default it returns the latest version (v4.0), you can access particular versions directly using:
+By default it returns the latest version (v5.0), you can access particular versions directly using:
 
 ```js
 const codepoints = require('unicode-tr51-emoji/v3.0/code-points');
