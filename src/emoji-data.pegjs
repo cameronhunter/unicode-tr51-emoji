@@ -88,7 +88,7 @@ Count
     { return parseInt([head, ...tail].join(''), 10) }
 
 Version
-  = "V"? version:$([0-9] "." [0-9])
+  = "V"? version:$([0-9]+ "." [0-9])
     { return version }
 
 Text
