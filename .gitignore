@@ -1,6 +1,7 @@
 code-points.js
 emoji-data.js
 emoji-sequences.js
+emoji-variation-sequences.js
 emoji-zwj-sequences.js
 index.js
 node_modules/

@@ -23,8 +23,8 @@ const emojiData = parse(input("../parser/emoji-data"), path.join(opts.input, "em
   process.exit(1);
 });
 
-// Create output from emoji(-zwj)?-sequences.txt files
-const emojiSequences = ["emoji-sequences", "emoji-zwj-sequences"].map((file) => {
+// Create output from emoji(-(zwj|variation))?-sequences.txt files
+const emojiSequences = ["emoji-sequences", "emoji-variation-sequences", "emoji-zwj-sequences"].map((file) => {
   return parse(input("../parser/emoji-sequences"), path.join(opts.input, `${file}.txt`)).then((parsed) => {
     return write(output(`${file}.js`), parsed).then(() => parsed);
   }).catch((error) => {
@@ -34,13 +34,13 @@ const emojiSequences = ["emoji-sequences", "emoji-zwj-sequences"].map((file) => 
 });
 
 // Create index, symbols and codepoints output
-Promise.all([emojiData, ...emojiSequences]).then(([data, sequences, zwjSequences]) => {
+Promise.all([emojiData, ...emojiSequences]).then(([data, ...sequences]) => {
   const symbols = (array) => array.map(_ => _.symbol);
   const codepoints = (array) => array.map(_ => _.codepoints).map(c => c.length === 1 ? c[0] : c);
   return Promise.all([
-    write(output("index.js"), [...data, ...sequences, ...zwjSequences]),
-    write(output("symbols.js"), [...symbols(data), ...symbols(sequences), ...symbols(zwjSequences)]),
-    write(output("code-points.js"), [...codepoints(data), ...codepoints(sequences), ...codepoints(zwjSequences)])
+    write(output("index.js"), [...data, ...sequences.reduce((result, sequence) => [...result, ...sequence], [])]),
+    write(output("symbols.js"), [...symbols(data), ...sequences.reduce((result, sequence) => [...result, ...symbols(sequence)], [])]),
+    write(output("code-points.js"), [...codepoints(data), ...sequences.reduce((result, sequence) => [...result, ...codepoints(sequence)], [])])
   ]);
 }).catch((error) => {
   console.error(error);

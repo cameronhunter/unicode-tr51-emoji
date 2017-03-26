@@ -17,7 +17,8 @@
     "build:latest": "ls data | tail -1 | xargs -IDIR bin/build -i ./data/DIR -o .",
     "build": "npm run build:versions && npm run build:latest",
     "pretest": "npm run build",
-    "test": "ava --tap | tap-diff",
+    "test": "ava",
+    "test:update": "ava --update-snapshots",
     "preversion": "npm run test"
   },
   "repository": {
@@ -42,6 +43,7 @@
     "v5.0",
     "emoji-data.js",
     "emoji-sequences.js",
+    "emoji-variation-sequences.js",
     "emoji-zwj-sequences.js",
     "index.js",
     "code-points.js",
@@ -56,7 +58,6 @@
     "nomnom": "^1.8.1",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-pegjs": "^2.1.3",
-    "tap-diff": "^0.1.1"
+    "rollup-plugin-pegjs": "^2.1.3"
   }
 }

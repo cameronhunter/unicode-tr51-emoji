@@ -15,8 +15,19 @@ File
    { return lines.filter(Boolean).reduce((result, c) => [...result, c], []) }
 
 Line
-  = (DefinitionV2 / DefinitionV3 / DefinitionV4)
+  = (DefinitionV2 / DefinitionV3 / DefinitionV4 / DefinitionV5)
   / (Comment / BlankLine) { return null }
+
+/***************************************************************************************************
+ * Version 5.0
+ *
+ * Format:
+ * code_point(s) ; type_field ; # (version) description
+ **************************************************************************************************/
+
+DefinitionV5
+  = codepoints:Codepoints _ ";" _ type:$(("text" / "emoji") _ "style") _ ";" _ "#" _ "(" version:$([1-9][0-9]* "." [0-9]+) ")" _ description:(!"\n" char:. { return char })* "\n"?
+    { return Object.assign({ description: description.join(''), type, version }, codepoints) }
 
 /***************************************************************************************************
  * Version 4.0
@@ -33,11 +44,11 @@ DefinitionV4
  * Version 3.0
  *
  * Format:
- * code_point(s) ; type_field # version [count] name(s)
+ * code_point(s) ; type_field # version [count] (sequence) name(s)
  **************************************************************************************************/
 
 DefinitionV3
-  = codepoints:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ count:Word _ symbol:Word _ description:(!"\n" char:. { return char })* "\n"?
+  = codepoints:Codepoints _ ";" _ type:Text _ "#" _ version:Word _ (count:Word _ symbol:Word)? _ description:(!"\n" char:. { return char })* "\n"?
     { return Object.assign({ description: description.join(''), type, version }, codepoints) }
 
 /***************************************************************************************************
